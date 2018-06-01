@@ -6,10 +6,18 @@ module.exports = {
             .then(products => res.status(200).send(products))
             .catch(() => res.status(500).send())
     },
-    addProduct: (req,res) =>{
+    addProduct: (req, res) => {
         const db = req.app.get('db');
-        const {itemInput, priceInput, quantityInput}=req.body
-        db.add_product([itemInput,priceInput,quantityInput])
+        const { itemInput, priceInput, quantityInput } = req.body
+        db.add_product([itemInput, priceInput, quantityInput])
+            .then(products => res.status(200).send(products))
+            .catch(() => res.status(500).send())
+    },
+    deleteProduct: (req, res) => {
+        const db = req.app.get('db');
+        const { id } = req.params
+//YOU NEED TO SEND INFO IN SQUARE BRACKETS!!
+        db.delete_product([id])
             .then(products => res.status(200).send(products))
             .catch(() => res.status(500).send())
     }
